@@ -10,7 +10,8 @@ DATE = datetime.now().strftime("%d%m%Y")
 
 dataset_switch = 1
 
-DATA_DIR = os.environ.get("DATA_DIR")
+#DATA_DIR = os.environ.get("DATA_DIR")
+DATA_DIR = "/home/ubuntu/workspace/caxton-dataset/"
 
 if dataset_switch == 0:
     DATASET_NAME = "dataset_single_layer"
@@ -43,7 +44,7 @@ BATCH_SIZE = 32
 MAX_EPOCHS = 50
 
 NUM_NODES = 1
-NUM_GPUS = 2
+NUM_GPUS = 1
 ACCELERATOR = "ddp"
 
 

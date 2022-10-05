@@ -3,7 +3,7 @@ import numpy as np
 
 cmdStr = '^'
 
-for i in range(192):
+for i in range(70, 192):
     wget_link = f"https://www.repository.cam.ac.uk/bitstream/handle/1810/339869/print{i}.zip?sequence={i + 7}&isAllowed=y"
     wget_cmd = f"wget -q --show-progress -O data/print{i}.zip \'{wget_link}\'"
     

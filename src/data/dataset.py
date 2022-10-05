@@ -8,6 +8,8 @@ from torchvision import transforms
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 
+
+
 class ParametersDataset(Dataset):
     def __init__(
         self,
@@ -23,7 +25,7 @@ class ParametersDataset(Dataset):
         hotend=False,
         per_img_normalisation=False,
     ):
-        self.dataframe = pd.read_csv(csv_file)
+        self.dataframe = pd.read_csv(csv_file)  # loads locally
         self.root_dir = root_dir
         self.pre_crop_transform = pre_crop_transform
         self.post_crop_transform = post_crop_transform
@@ -47,7 +49,7 @@ class ParametersDataset(Dataset):
         if torch.is_tensor(idx):
             idx = idx.tolist()
 
-        img_name = os.path.join(self.root_dir, self.dataframe.img_path[idx])
+        img_name = os.path.join(self.root_dir, self.dataframe.img_path[idx])  # path to S3
         
         dim = self.image_dim[0] / 2
 
@@ -56,7 +58,7 @@ class ParametersDataset(Dataset):
         right = self.dataframe.nozzle_tip_x[idx] + dim
         bottom = self.dataframe.nozzle_tip_y[idx] + dim
 
-        image = Image.open(img_name)
+        image = Image.open(img_name)  # load from S3
         if self.pre_crop_transform:
             image = self.pre_crop_transform(image)
         image = image.crop((left, top, right, bottom))
